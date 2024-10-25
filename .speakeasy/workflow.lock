@@ -1,9 +1,9 @@
-speakeasyVersion: 1.390.7
+speakeasyVersion: 1.421.2
 sources:
     bolt-csharp-api:
         sourceNamespace: bolt-csharp-api
-        sourceRevisionDigest: sha256:7cf2f95e80bcf55bcfda06d7c45988074ae88241aa57404a3bd6ee6a8ce11525
-        sourceBlobDigest: sha256:27d07c65383b445e0fd3a098783adeabae528de8fda49d2e814fb07322139a63
+        sourceRevisionDigest: sha256:e6d1652183b280c58d60fd08b6c61af949eedae16c2132d08f6c24654f2e12d0
+        sourceBlobDigest: sha256:27ef8260eccf290aa1e165a587971b1472681ad89653dbbf18fcaf785d2f22b2
         tags:
             - latest
             - master
@@ -11,9 +11,8 @@ targets:
     bolt-sdk:
         source: bolt-csharp-api
         sourceNamespace: bolt-csharp-api
-        sourceRevisionDigest: sha256:7cf2f95e80bcf55bcfda06d7c45988074ae88241aa57404a3bd6ee6a8ce11525
-        sourceBlobDigest: sha256:27d07c65383b445e0fd3a098783adeabae528de8fda49d2e814fb07322139a63
-        outLocation: /github/workspace/repo
+        sourceRevisionDigest: sha256:e6d1652183b280c58d60fd08b6c61af949eedae16c2132d08f6c24654f2e12d0
+        sourceBlobDigest: sha256:27ef8260eccf290aa1e165a587971b1472681ad89653dbbf18fcaf785d2f22b2
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

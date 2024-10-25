@@ -18,13 +18,13 @@ namespace Boltpay.SDK.Models.Components
     {
 
         /// <summary>
-        /// A list of addresses associated with this account.
+        /// A list of addresses associated with this account. These can be considered the &quot;shipping addresses&quot;. The account&apos;s visible addresses are filtered according to the configured shipping destinations in your Bolt merchant dashboard. If no account addresses are available, use the billing address of the selected payment method.
         /// </summary>
         [JsonProperty("addresses")]
         public List<AddressListing> Addresses { get; set; } = default!;
 
         /// <summary>
-        /// A list of payment methods associated with this account.
+        /// A list of payment methods associated with this account. The account&apos;s visible payment methods are filtered to include only cards that are chargeable.
         /// </summary>
         [JsonProperty("payment_methods")]
         public List<PaymentMethod> PaymentMethods { get; set; } = default!;
