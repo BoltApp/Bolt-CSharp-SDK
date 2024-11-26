@@ -118,11 +118,11 @@ By default, an API error will raise a `Boltpay.SDK.Models.Errors.SDKException` e
 
 When custom error responses are specified for an operation, the SDK may also throw their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `GetDetailsAsync` method throws the following exceptions:
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| Boltpay.SDK.Models.Errors.Error        | 4XX                                    | application/json                       |
-| Boltpay.SDK.Models.Errors.FieldError   | 4XX                                    | application/json                       |
-| Boltpay.SDK.Models.Errors.SDKException | 5XX                                    | \*/\*                                  |
+| Error Type                             | Status Code | Content Type     |
+| -------------------------------------- | ----------- | ---------------- |
+| Boltpay.SDK.Models.Errors.Error        | 4XX         | application/json |
+| Boltpay.SDK.Models.Errors.FieldError   | 4XX         | application/json |
+| Boltpay.SDK.Models.Errors.SDKException | 5XX         | \*/\*            |
 
 ### Example
 
@@ -171,24 +171,34 @@ catch (Exception ex)
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
+### Server Variables
 
-You can override the default server globally by passing a server index to the `serverIndex: number` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://{environment}.bolt.com/v3` | `environment` (default is `api-sandbox`) |
-
-
-
-#### Variables
-
-Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
+The default server `https://{environment}.bolt.com/v3` contains variables and is set to `https://api-sandbox.bolt.com/v3` by default. To override default values, the following parameters are available when initializing the SDK client instance:
  * `environment: ServerEnvironment`
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverUrl: str` optional parameter when initializing the SDK client instance. For example:
+The default server can also be overridden globally by passing a URL to the `serverUrl: string` optional parameter when initializing the SDK client instance. For example:
+```csharp
+using Boltpay.SDK;
+using Boltpay.SDK.Models.Requests;
+using Boltpay.SDK.Models.Components;
+
+var sdk = new BoltSDK(
+    serverUrl: "https://api-sandbox.bolt.com/v3",
+    security: new Security() {
+        Oauth = "<YOUR_OAUTH_HERE>",
+        ApiKey = "<YOUR_API_KEY_HERE>",
+    }
+);
+
+var res = await sdk.Account.GetDetailsAsync(
+    xPublishableKey: "<value>",
+    xMerchantClientId: "<id>"
+);
+
+// handle response
+```
 <!-- End Server Selection [server] -->
 
 <!-- Start Authentication [security] -->
@@ -198,10 +208,10 @@ The default server can also be overridden globally by passing a URL to the `serv
 
 This SDK supports the following security schemes globally:
 
-| Name         | Type         | Scheme       |
-| ------------ | ------------ | ------------ |
-| `Oauth`      | oauth2       | OAuth2 token |
-| `ApiKey`     | apiKey       | API key      |
+| Name     | Type   | Scheme       |
+| -------- | ------ | ------------ |
+| `Oauth`  | oauth2 | OAuth2 token |
+| `ApiKey` | apiKey | API key      |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```csharp

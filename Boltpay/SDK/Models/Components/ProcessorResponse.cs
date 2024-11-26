@@ -9,20 +9,22 @@
 #nullable enable
 namespace Boltpay.SDK.Models.Components
 {
-    using Boltpay.SDK.Models.Components;
     using Boltpay.SDK.Utils;
     using Newtonsoft.Json;
     
-    public class TransactionAuthorization
+    /// <summary>
+    /// Raw authorization response from the payment processor
+    /// </summary>
+    public class ProcessorResponse
     {
 
-        [JsonProperty("processor_reference")]
-        public string? ProcessorReference { get; set; }
+        [JsonProperty("content_type")]
+        public string? ContentType { get; set; }
 
-        /// <summary>
-        /// Raw authorization response from the payment processor
-        /// </summary>
-        [JsonProperty("processor_response")]
-        public ProcessorResponse? ProcessorResponse { get; set; }
+        [JsonProperty("api_version")]
+        public string? ApiVersion { get; set; }
+
+        [JsonProperty("text")]
+        public string? Text { get; set; }
     }
 }

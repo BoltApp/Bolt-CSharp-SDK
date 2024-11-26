@@ -11,15 +11,18 @@ generation:
     requestResponseComponentNamesFeb2024: true
   auth:
     oAuth2ClientCredentialsEnabled: false
+    oAuth2PasswordEnabled: false
 csharp:
-  version: 0.3.0
+  version: 0.4.0
   additionalDependencies: []
   author: Speakeasy
   clientServerStatusCodesAsErrors: true
+  defaultErrorName: SDKException
   disableNamespacePascalCasingApr2024: true
   dotnetVersion: net8.0
   enableSourceLink: false
   flattenGlobalSecurity: true
+  flatteningOrder: ""
   imports:
     option: openapi
     paths:
@@ -31,6 +34,7 @@ csharp:
   includeDebugSymbols: false
   inputModelSuffix: input
   maxMethodParams: 4
+  methodArguments: infer-optional-args
   outputModelSuffix: output
   packageName: Boltpay.SDK
   packageTags: ""

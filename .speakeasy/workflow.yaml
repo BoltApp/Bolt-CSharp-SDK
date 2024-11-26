@@ -10,3 +10,7 @@ targets:
     bolt-sdk:
         target: csharp
         source: bolt-csharp-api
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/bolt/boltpublicapi/bolt-csharp-api-code-samples
+            blocking: false
