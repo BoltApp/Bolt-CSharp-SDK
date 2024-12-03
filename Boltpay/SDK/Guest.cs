@@ -32,7 +32,7 @@ namespace Boltpay.SDK
         /// Initialize a Bolt guest shopper&apos;s intent to pay for a cart, using the specified payment method. Payments must be finalized before indicating the payment result to the shopper. Some payment methods will finalize automatically after initialization. For these payments, they will transition directly to &quot;finalized&quot; and the response from Initialize Payment will contain a finalized payment.
         /// </remarks>
         /// </summary>
-        Task<GuestPaymentsInitializeResponse> InitializeAsync(GuestPaymentsInitializeSecurity security, string xPublishableKey, string xMerchantClientId, GuestPaymentInitializeRequest guestPaymentInitializeRequest);
+        Task<GuestPaymentsInitializeResponse> InitializeAsync(GuestPaymentsInitializeSecurity security, string xPublishableKey, GuestPaymentInitializeRequest guestPaymentInitializeRequest, string? xMerchantClientId = null);
 
         /// <summary>
         /// Finalize a pending guest payment
@@ -41,17 +41,17 @@ namespace Boltpay.SDK
         /// Finalize a pending payment being made by a Bolt guest shopper. Upon receipt of a finalized payment result, payment success should be communicated to the shopper.
         /// </remarks>
         /// </summary>
-        Task<GuestPaymentsActionResponse> PerformActionAsync(GuestPaymentsActionSecurity security, string xPublishableKey, string xMerchantClientId, string id, PaymentActionRequest paymentActionRequest);
+        Task<GuestPaymentsActionResponse> PerformActionAsync(GuestPaymentsActionSecurity security, string xPublishableKey, string id, PaymentActionRequest paymentActionRequest, string? xMerchantClientId = null);
     }
 
     public class Guest: IGuest
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.1";
-        private const string _sdkGenVersion = "2.466.0";
-        private const string _openapiDocVersion = "3.2.5";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.4.1 2.466.0 3.2.5 Boltpay.SDK";
+        private const string _sdkVersion = "0.5.0";
+        private const string _sdkGenVersion = "2.467.4";
+        private const string _openapiDocVersion = "3.3.0";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.467.4 3.3.0 Boltpay.SDK";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Boltpay.SDK.Models.Components.Security>? _securitySource;
@@ -64,13 +64,13 @@ namespace Boltpay.SDK
             SDKConfiguration = config;
         }
 
-        public async Task<GuestPaymentsInitializeResponse> InitializeAsync(GuestPaymentsInitializeSecurity security, string xPublishableKey, string xMerchantClientId, GuestPaymentInitializeRequest guestPaymentInitializeRequest)
+        public async Task<GuestPaymentsInitializeResponse> InitializeAsync(GuestPaymentsInitializeSecurity security, string xPublishableKey, GuestPaymentInitializeRequest guestPaymentInitializeRequest, string? xMerchantClientId = null)
         {
             var request = new GuestPaymentsInitializeRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 GuestPaymentInitializeRequest = guestPaymentInitializeRequest,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -186,14 +186,14 @@ namespace Boltpay.SDK
             }
         }
 
-        public async Task<GuestPaymentsActionResponse> PerformActionAsync(GuestPaymentsActionSecurity security, string xPublishableKey, string xMerchantClientId, string id, PaymentActionRequest paymentActionRequest)
+        public async Task<GuestPaymentsActionResponse> PerformActionAsync(GuestPaymentsActionSecurity security, string xPublishableKey, string id, PaymentActionRequest paymentActionRequest, string? xMerchantClientId = null)
         {
             var request = new GuestPaymentsActionRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 Id = id,
                 PaymentActionRequest = paymentActionRequest,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/guest/payments/{id}", request);

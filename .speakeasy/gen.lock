@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 6be0ff6b-aa40-4b34-a3eb-72d091b3c545
 management:
-  docChecksum: 4872a098e96fdd74a02537943961bed7
-  docVersion: 3.2.5
-  speakeasyVersion: 1.448.0
-  generationVersion: 2.466.0
-  releaseVersion: 0.4.1
-  configChecksum: d185556e87f2ddeec66e007d4dc7d70f
+  docChecksum: 8ff3e37e3bcdf4b0ef72f37df29c2c47
+  docVersion: 3.3.0
+  speakeasyVersion: 1.449.0
+  generationVersion: 2.467.4
+  releaseVersion: 0.5.0
+  configChecksum: 53afcfd3f663695977d7e8589f51f2c3
   repoURL: https://github.com/BoltApp/Bolt-CSharp-SDK.git
 features:
   csharp:

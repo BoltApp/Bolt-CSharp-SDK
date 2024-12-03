@@ -15,13 +15,18 @@ Bolt API Reference: A comprehensive Bolt API reference for interacting with Acco
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [Boltpay.SDK](#boltpaysdk)
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Authentication](#authentication)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
 
-* [SDK Installation](#sdk-installation)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Authentication](#authentication)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -248,7 +253,6 @@ var res = await sdk.Payments.Guest.InitializeAsync(
         ApiKey = "<YOUR_API_KEY_HERE>",
     },
     xPublishableKey: "<value>",
-    xMerchantClientId: "<id>",
     guestPaymentInitializeRequest: new GuestPaymentInitializeRequest() {
         Profile = new ProfileCreationData() {
             CreateAccount = true,
@@ -325,7 +329,8 @@ var res = await sdk.Payments.Guest.InitializeAsync(
                 Token = "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
             }
         ),
-    }
+    },
+    xMerchantClientId: "<id>"
 );
 
 // handle response

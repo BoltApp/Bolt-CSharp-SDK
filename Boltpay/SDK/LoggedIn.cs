@@ -33,7 +33,7 @@ namespace Boltpay.SDK
         /// 
         /// </remarks>
         /// </summary>
-        Task<PaymentsInitializeResponse> InitializeAsync(string xPublishableKey, string xMerchantClientId, PaymentInitializeRequest paymentInitializeRequest);
+        Task<PaymentsInitializeResponse> InitializeAsync(string xPublishableKey, PaymentInitializeRequest paymentInitializeRequest, string? xMerchantClientId = null);
 
         /// <summary>
         /// Finalize a pending payment
@@ -42,17 +42,17 @@ namespace Boltpay.SDK
         /// Finalize a pending payment being made by a Bolt logged-in shopper. Upon receipt of a finalized payment result, payment success should be communicated to the shopper.
         /// </remarks>
         /// </summary>
-        Task<PaymentsActionResponse> PerformActionAsync(string xPublishableKey, string xMerchantClientId, string id, PaymentActionRequest paymentActionRequest);
+        Task<PaymentsActionResponse> PerformActionAsync(string xPublishableKey, string id, PaymentActionRequest paymentActionRequest, string? xMerchantClientId = null);
     }
 
     public class LoggedIn: ILoggedIn
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.1";
-        private const string _sdkGenVersion = "2.466.0";
-        private const string _openapiDocVersion = "3.2.5";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.4.1 2.466.0 3.2.5 Boltpay.SDK";
+        private const string _sdkVersion = "0.5.0";
+        private const string _sdkGenVersion = "2.467.4";
+        private const string _openapiDocVersion = "3.3.0";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.467.4 3.3.0 Boltpay.SDK";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Boltpay.SDK.Models.Components.Security>? _securitySource;
@@ -65,13 +65,13 @@ namespace Boltpay.SDK
             SDKConfiguration = config;
         }
 
-        public async Task<PaymentsInitializeResponse> InitializeAsync(string xPublishableKey, string xMerchantClientId, PaymentInitializeRequest paymentInitializeRequest)
+        public async Task<PaymentsInitializeResponse> InitializeAsync(string xPublishableKey, PaymentInitializeRequest paymentInitializeRequest, string? xMerchantClientId = null)
         {
             var request = new PaymentsInitializeRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 PaymentInitializeRequest = paymentInitializeRequest,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -185,14 +185,14 @@ namespace Boltpay.SDK
             }
         }
 
-        public async Task<PaymentsActionResponse> PerformActionAsync(string xPublishableKey, string xMerchantClientId, string id, PaymentActionRequest paymentActionRequest)
+        public async Task<PaymentsActionResponse> PerformActionAsync(string xPublishableKey, string id, PaymentActionRequest paymentActionRequest, string? xMerchantClientId = null)
         {
             var request = new PaymentsActionRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 Id = id,
                 PaymentActionRequest = paymentActionRequest,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/payments/{id}", request);

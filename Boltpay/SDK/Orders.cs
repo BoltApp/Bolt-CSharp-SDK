@@ -35,7 +35,7 @@ namespace Boltpay.SDK
         /// Create an order that was prepared outside the Bolt ecosystem. Some Bolt-powered flows automatically manage order creation - in those flows the order ID will be provided separately and not through this API.
         /// </remarks>
         /// </summary>
-        Task<OrdersCreateResponse> OrdersCreateAsync(OrdersCreateSecurity security, string xPublishableKey, string xMerchantClientId, Order order);
+        Task<OrdersCreateResponse> OrdersCreateAsync(OrdersCreateSecurity security, string xPublishableKey, Order order, string? xMerchantClientId = null);
     }
 
     /// <summary>
@@ -45,10 +45,10 @@ namespace Boltpay.SDK
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.1";
-        private const string _sdkGenVersion = "2.466.0";
-        private const string _openapiDocVersion = "3.2.5";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.4.1 2.466.0 3.2.5 Boltpay.SDK";
+        private const string _sdkVersion = "0.5.0";
+        private const string _sdkGenVersion = "2.467.4";
+        private const string _openapiDocVersion = "3.3.0";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.467.4 3.3.0 Boltpay.SDK";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Boltpay.SDK.Models.Components.Security>? _securitySource;
@@ -61,13 +61,13 @@ namespace Boltpay.SDK
             SDKConfiguration = config;
         }
 
-        public async Task<OrdersCreateResponse> OrdersCreateAsync(OrdersCreateSecurity security, string xPublishableKey, string xMerchantClientId, Order order)
+        public async Task<OrdersCreateResponse> OrdersCreateAsync(OrdersCreateSecurity security, string xPublishableKey, Order order, string? xMerchantClientId = null)
         {
             var request = new OrdersCreateRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 Order = order,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 

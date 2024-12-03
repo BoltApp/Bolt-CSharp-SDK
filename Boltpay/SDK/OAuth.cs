@@ -37,7 +37,7 @@ namespace Boltpay.SDK
         /// Retrieve a new or refresh an existing OAuth token.
         /// </remarks>
         /// </summary>
-        Task<OauthGetTokenResponse> GetTokenAsync(string xMerchantClientId, TokenRequest tokenRequest);
+        Task<OauthGetTokenResponse> GetTokenAsync(TokenRequest tokenRequest, string? xMerchantClientId = null);
     }
 
     /// <summary>
@@ -49,10 +49,10 @@ namespace Boltpay.SDK
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.1";
-        private const string _sdkGenVersion = "2.466.0";
-        private const string _openapiDocVersion = "3.2.5";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.4.1 2.466.0 3.2.5 Boltpay.SDK";
+        private const string _sdkVersion = "0.5.0";
+        private const string _sdkGenVersion = "2.467.4";
+        private const string _openapiDocVersion = "3.3.0";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.467.4 3.3.0 Boltpay.SDK";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Boltpay.SDK.Models.Components.Security>? _securitySource;
@@ -65,12 +65,12 @@ namespace Boltpay.SDK
             SDKConfiguration = config;
         }
 
-        public async Task<OauthGetTokenResponse> GetTokenAsync(string xMerchantClientId, TokenRequest tokenRequest)
+        public async Task<OauthGetTokenResponse> GetTokenAsync(TokenRequest tokenRequest, string? xMerchantClientId = null)
         {
             var request = new OauthGetTokenRequest()
             {
-                XMerchantClientId = xMerchantClientId,
                 TokenRequest = tokenRequest,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 

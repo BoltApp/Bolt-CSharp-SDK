@@ -35,7 +35,7 @@ namespace Boltpay.SDK
         /// Retrieve a shopper&apos;s account details, such as addresses and payment information. The account&apos;s details are filtered to be relevant to your merchant account, and some fields may be missing for some accounts. See the schema for details.
         /// </remarks>
         /// </summary>
-        Task<AccountGetResponse> GetDetailsAsync(string xPublishableKey, string xMerchantClientId);
+        Task<AccountGetResponse> GetDetailsAsync(string xPublishableKey, string? xMerchantClientId = null);
 
         /// <summary>
         /// Add an address
@@ -44,7 +44,7 @@ namespace Boltpay.SDK
         /// Add an address to the shopper&apos;s account
         /// </remarks>
         /// </summary>
-        Task<AccountAddressCreateResponse> AddAddressAsync(string xPublishableKey, string xMerchantClientId, AddressListingInput addressListing);
+        Task<AccountAddressCreateResponse> AddAddressAsync(string xPublishableKey, AddressListingInput addressListing, string? xMerchantClientId = null);
 
         /// <summary>
         /// Edit an existing address
@@ -53,7 +53,7 @@ namespace Boltpay.SDK
         /// Edit an existing address on the shopper&apos;s account. This does not edit addresses that are already associated with other resources, such as transactions or shipments.
         /// </remarks>
         /// </summary>
-        Task<AccountAddressEditResponse> UpdateAddressAsync(string xPublishableKey, string xMerchantClientId, string id, AddressListingInput addressListing);
+        Task<AccountAddressEditResponse> UpdateAddressAsync(string xPublishableKey, string id, AddressListingInput addressListing, string? xMerchantClientId = null);
 
         /// <summary>
         /// Delete an existing address
@@ -62,7 +62,7 @@ namespace Boltpay.SDK
         /// Delete an existing address. Deleting an address does not invalidate or remove the address from transactions or shipments that are associated with it.
         /// </remarks>
         /// </summary>
-        Task<AccountAddressDeleteResponse> DeleteAddressAsync(string xPublishableKey, string xMerchantClientId, string id);
+        Task<AccountAddressDeleteResponse> DeleteAddressAsync(string xPublishableKey, string id, string? xMerchantClientId = null);
 
         /// <summary>
         /// Add a payment method
@@ -71,7 +71,7 @@ namespace Boltpay.SDK
         /// Add a payment method to a shopper&apos;s Bolt Account Wallet. For security purposes, this request must come from your backend. &lt;br/&gt; **Note**: Before using this API, the credit card details must be tokenized by Bolt&apos;s credit card tokenization service. Please review our <a href="https://help.bolt.com/products/ignite/api-implementation/#enhance-payments">Bolt Payment Field Component</a> or <a href="https://help.bolt.com/developers/references/bolt-tokenizer">Install the Bolt Tokenizer</a> documentation.
         /// </remarks>
         /// </summary>
-        Task<AccountAddPaymentMethodResponse> AddPaymentMethodAsync(string xPublishableKey, string xMerchantClientId, PaymentMethodInput paymentMethod);
+        Task<AccountAddPaymentMethodResponse> AddPaymentMethodAsync(string xPublishableKey, PaymentMethodInput paymentMethod, string? xMerchantClientId = null);
 
         /// <summary>
         /// Delete an existing payment method
@@ -80,7 +80,7 @@ namespace Boltpay.SDK
         /// Delete an existing payment method. Deleting a payment method does not invalidate or remove it from transactions or orders that are associated with it.
         /// </remarks>
         /// </summary>
-        Task<AccountPaymentMethodDeleteResponse> DeletePaymentMethodAsync(string xPublishableKey, string xMerchantClientId, string id);
+        Task<AccountPaymentMethodDeleteResponse> DeletePaymentMethodAsync(string xPublishableKey, string id, string? xMerchantClientId = null);
     }
 
     /// <summary>
@@ -90,10 +90,10 @@ namespace Boltpay.SDK
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.4.1";
-        private const string _sdkGenVersion = "2.466.0";
-        private const string _openapiDocVersion = "3.2.5";
-        private const string _userAgent = "speakeasy-sdk/csharp 0.4.1 2.466.0 3.2.5 Boltpay.SDK";
+        private const string _sdkVersion = "0.5.0";
+        private const string _sdkGenVersion = "2.467.4";
+        private const string _openapiDocVersion = "3.3.0";
+        private const string _userAgent = "speakeasy-sdk/csharp 0.5.0 2.467.4 3.3.0 Boltpay.SDK";
         private string _serverUrl = "";
         private ISpeakeasyHttpClient _client;
         private Func<Boltpay.SDK.Models.Components.Security>? _securitySource;
@@ -106,7 +106,7 @@ namespace Boltpay.SDK
             SDKConfiguration = config;
         }
 
-        public async Task<AccountGetResponse> GetDetailsAsync(string xPublishableKey, string xMerchantClientId)
+        public async Task<AccountGetResponse> GetDetailsAsync(string xPublishableKey, string? xMerchantClientId = null)
         {
             var request = new AccountGetRequest()
             {
@@ -215,13 +215,13 @@ namespace Boltpay.SDK
             }
         }
 
-        public async Task<AccountAddressCreateResponse> AddAddressAsync(string xPublishableKey, string xMerchantClientId, AddressListingInput addressListing)
+        public async Task<AccountAddressCreateResponse> AddAddressAsync(string xPublishableKey, AddressListingInput addressListing, string? xMerchantClientId = null)
         {
             var request = new AccountAddressCreateRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 AddressListing = addressListing,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -331,14 +331,14 @@ namespace Boltpay.SDK
             }
         }
 
-        public async Task<AccountAddressEditResponse> UpdateAddressAsync(string xPublishableKey, string xMerchantClientId, string id, AddressListingInput addressListing)
+        public async Task<AccountAddressEditResponse> UpdateAddressAsync(string xPublishableKey, string id, AddressListingInput addressListing, string? xMerchantClientId = null)
         {
             var request = new AccountAddressEditRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 Id = id,
                 AddressListing = addressListing,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/account/addresses/{id}", request);
@@ -447,13 +447,13 @@ namespace Boltpay.SDK
             }
         }
 
-        public async Task<AccountAddressDeleteResponse> DeleteAddressAsync(string xPublishableKey, string xMerchantClientId, string id)
+        public async Task<AccountAddressDeleteResponse> DeleteAddressAsync(string xPublishableKey, string id, string? xMerchantClientId = null)
         {
             var request = new AccountAddressDeleteRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 Id = id,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/account/addresses/{id}", request);
@@ -537,13 +537,13 @@ namespace Boltpay.SDK
             }
         }
 
-        public async Task<AccountAddPaymentMethodResponse> AddPaymentMethodAsync(string xPublishableKey, string xMerchantClientId, PaymentMethodInput paymentMethod)
+        public async Task<AccountAddPaymentMethodResponse> AddPaymentMethodAsync(string xPublishableKey, PaymentMethodInput paymentMethod, string? xMerchantClientId = null)
         {
             var request = new AccountAddPaymentMethodRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 PaymentMethod = paymentMethod,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
 
@@ -655,13 +655,13 @@ namespace Boltpay.SDK
             }
         }
 
-        public async Task<AccountPaymentMethodDeleteResponse> DeletePaymentMethodAsync(string xPublishableKey, string xMerchantClientId, string id)
+        public async Task<AccountPaymentMethodDeleteResponse> DeletePaymentMethodAsync(string xPublishableKey, string id, string? xMerchantClientId = null)
         {
             var request = new AccountPaymentMethodDeleteRequest()
             {
                 XPublishableKey = xPublishableKey,
-                XMerchantClientId = xMerchantClientId,
                 Id = id,
+                XMerchantClientId = xMerchantClientId,
             };
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
             var urlString = URLBuilder.Build(baseUrl, "/account/payment-methods/{id}", request);
