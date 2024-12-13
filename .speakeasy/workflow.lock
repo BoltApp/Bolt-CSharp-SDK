@@ -1,21 +1,21 @@
-speakeasyVersion: 1.449.0
+speakeasyVersion: 1.454.2
 sources:
     bolt-csharp-api:
         sourceNamespace: bolt-csharp-api
-        sourceRevisionDigest: sha256:0a1817afa56dd122fa887b7c8df99062e9d899d29bc46af209e03738c4d1e75a
-        sourceBlobDigest: sha256:51c81ecaaa90446ad8968d89a42a84bcd2b3bfa0f97ba4cb8aae067637538117
+        sourceRevisionDigest: sha256:bb4801bc69eb28178bf852aa7f4605d3b1b493ecfc4287a0371957db3426923e
+        sourceBlobDigest: sha256:13a47f75ea523066457c04434bb9431410e7b4b9454d7d0049f421cab0a1ebd8
         tags:
             - latest
-            - speakeasy-sdk-regen-1733185923
-            - 3.3.0
+            - speakeasy-sdk-regen-1734049885
+            - 3.3.1
 targets:
     bolt-sdk:
         source: bolt-csharp-api
         sourceNamespace: bolt-csharp-api
-        sourceRevisionDigest: sha256:0a1817afa56dd122fa887b7c8df99062e9d899d29bc46af209e03738c4d1e75a
-        sourceBlobDigest: sha256:51c81ecaaa90446ad8968d89a42a84bcd2b3bfa0f97ba4cb8aae067637538117
+        sourceRevisionDigest: sha256:bb4801bc69eb28178bf852aa7f4605d3b1b493ecfc4287a0371957db3426923e
+        sourceBlobDigest: sha256:13a47f75ea523066457c04434bb9431410e7b4b9454d7d0049f421cab0a1ebd8
         codeSamplesNamespace: bolt-csharp-api-code-samples
-        codeSamplesRevisionDigest: sha256:8d19b56b300b5fbfe771442a578084d888dd830cf41482639e30b55f9b94d2fe
+        codeSamplesRevisionDigest: sha256:1a8789f2f84ca3720fb92ffa954df4e4e7b7ca51fd28bd0e563d5a2577e76fa4
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
